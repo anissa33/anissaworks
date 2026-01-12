@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="id" data-bs-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+    <!-- Meta Tags untuk SEO & PWA -->
+    <title>anissaworks | Digital Business Portfolio</title>
+    <meta name="description" content="Portofolio Mahasiswa Bisnis Digital - Marketing, Data Analysis, & Product Management.">
+    <meta name="theme-color" content="#0a192f">
+
+    <!-- Fonts: Poppins & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Icons (Bootstrap Icons) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+    <!-- Anime.js (CDN) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+
+    <style>
+        /* --- CSS Custom Variables (Navy Theme) --- */
+        :root {
+            /* Warna Utama: Deep Navy */
+            --primary-color: #0a192f; 
+            /* Warna Sekunder: Lighter Navy / Slate */
+            --secondary-color: #112240; 
+            /* Aksen: Muted Blue-Grey */
+            --accent-color: #233554; 
+            /* Highlight Text: Light Grey/White */
+            --text-highlight: #ccd6f6;
+            
+            --bg-light: #f8f9fa;
+            --bg-dark: #020c1b;
+            --card-radius: 12px;
+            --font-heading: 'Poppins', sans-serif;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        /* --- Global Styles --- */
+        body {
+            font-family: var(--font-body);
+            color: var(--primary-color);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Override Bootstrap Text Colors for Navy Theme */
+        .text-primary {
+            color: var(--primary-color) !important;
+        }
+        
+        .bg-primary {
+            background-color: var(--primary-color) !important;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--secondary-color);
+            border-color: var(--secondary-color);
+        }
+
+        .btn-outline-primary {
+            color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .btn-outline-primary:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        /* Dark Mode Specifics */
+        [data-bs-theme="dark"] body {
+            background-color: var(--bg-dark);
+            color: var(--text-highlight);
+        }
+        
+        [data-bs-theme="dark"] .text-primary {
+            color: #64ffda !important; 
+        }
+        
+        [data-bs-theme="dark"] .bg-primary-subtle {
+            background-color: var(--secondary-color) !important;
+            color: var(--text-highlight) !important;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-heading);
+            font-weight: 700;
+        }
+
+        /* --- Navbar & Active State (MODIFIED: Navy Background) --- */
+        .navbar {
+            background-color: var(--primary-color); /* Navy Background Always */
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        [data-bs-theme="dark"] .navbar {
+            background-color: rgba(10, 25, 47, 0.95);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .navbar-brand {
+            color: white !important; /* Brand always white on Navy */
+        }
+
+        .nav-link {
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.7) !important; /* Text light on Navy */
+            position: relative;
+            padding-bottom: 5px;
+            margin: 0 5px;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: white !important;
+        }
+
+        /* Garis Bawah Navigasi (Putih/Cyan di atas Navy) */
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            display: block;
+            margin-top: 5px;
+            right: 0;
+            background: #64ffda; /* Cyan accent for visibility */
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+            left: 0;
+        }
+
+        /* Hamburger Menu Color */
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.7%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+        }
+
+        /* --- Hero Section --- */
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 80px;
+        }
+
+        .hero-img {
+            border-radius: 20px;
+            border: 8px solid rgba(10, 25, 47, 0.1); 
+            transition: all 0.5s ease;
+            object-fit: cover;
+            width: 100%;
+            max-width: 380px;
+        }
+
+        [data-bs-theme="dark"] .hero-img {
+             border-color: rgba(100, 255, 218, 0.1);
+        }
+
+        /* --- Cards --- */
+        .custom-card {
+            border: 1px solid rgba(10, 25, 47, 0.1);
+            border-radius: var(--card-radius);
+            transition: transform 0.3s, box-shadow 0.3s;
+            background: #ffffff;
+            height: 100%;
+        }
+        
+        [data-bs-theme="dark"] .custom-card {
+            background: var(--secondary-color);
+            border-color: #233554;
+        }
+
+        .custom-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(10, 25, 47, 0.15);
+        }
+
+        /* --- Skills Badge --- */
+        .skill-badge {
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+            transition: all 0.2s;
+        }
+
+        [data-bs-theme="dark"] .skill-badge {
+            color: #64ffda;
+            border-color: #64ffda;
+        }
+
+        .skill-badge:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        [data-bs-theme="dark"] .skill-badge:hover {
+            background-color: rgba(100, 255, 218, 0.1);
+            color: #64ffda;
+        }
+
+        /* --- Timeline --- */
+        .timeline {
+            border-left: 2px solid var(--primary-color);
+            padding-left: 2rem;
+        }
+        
+        [data-bs-theme="dark"] .timeline {
+            border-left-color: #233554;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.6rem;
+            top: 5px;
+            width: 1.2rem;
+            height: 1.2rem;
+            background: var(--bg-light);
+            border: 3px solid var(--primary-color);
+            border-radius: 50%;
+        }
+        
+        [data-bs-theme="dark"] .timeline-item::before {
+            background: var(--bg-dark);
+            border-color: #64ffda;
+        }
+
+        /* --- Floating Action Button --- */
+        .btn-scroll-top {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            display: none;
+            z-index: 99;
+            width: 45px;
+            height: 45px;
+            border-radius: 8px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+        }
+
+        /* --- Animations --- */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+    </style>
+</head>
+<body data-bs-spy="scroll" data-bs-target="#mainNav" data-bs-offset="100">
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top" id="mainNav">
+        <div class="container">
+            <!-- Brand -->
+            <a class="navbar-brand fw-bold" href="#">
+                anissaworks.
+            </a>
+            
+            <div class="d-flex align-items-center order-lg-3 gap-3">
+                <!-- Dark Mode Toggle -->
+                <div class="theme-toggle text-white" id="darkModeToggle" style="cursor: pointer;">
+                    <i class="bi bi-moon-stars-fill fs-5" id="themeIcon"></i>
+                </div>
+                <!-- Mobile Toggler -->
+                <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+
+            <!-- Menu Links -->
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav gap-4">
+                    <li class="nav-item"><a class="nav-link active" href="#home" onclick="setActive(this)">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about" onclick="setActive(this)">About Me</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#education" onclick="setActive(this)">Education</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#skills" onclick="setActive(this)">Skills</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#portfolio" onclick="setActive(this)">Portfolio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact" onclick="setActive(this)">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home" class="hero-section">
+        <div class="container">
+            <div class="row align-items-center flex-column-reverse flex-lg-row">
+                <div class="col-lg-7 mt-5 mt-lg-0 animate-on-scroll">
+                    <p class="text-primary fw-medium mb-2 font-monospace">Hi, my name is</p>
+                    <h1 class="display-3 fw-bold mb-2">Anissa.</h1>
+                    <h2 class="display-6 fw-bold text-muted mb-4">I build things for the web & business.</h2>
+                    <p class="lead mb-5 pe-lg-5" style="max-width: 600px;">
+                        Mahasiswa <strong>Bisnis Digital</strong> yang berfokus pada analisis data dan strategi pemasaran. Saya menggabungkan kreativitas dengan data untuk menciptakan dampak nyata.
+                    </p>
+                    <div class="d-flex gap-3">
+                        <a href="#contact" class="btn btn-primary px-5 py-3 fw-bold shadow-sm">Contact Me</a>
+                        <a href="#" class="btn btn-outline-primary px-4 py-3 fw-bold">Resume / CV</a>
+                    </div>
+                </div>
+                <div class="col-lg-5 text-center animate-on-scroll">
+                    <!-- Placeholder Image -->
+                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=800&auto=format&fit=crop" alt="Profile" class="hero-img shadow-lg">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-5">
+        <div class="container py-5">
+            <div class="row mb-5 animate-on-scroll">
+                <div class="col-lg-8">
+                    <div class="d-flex align-items-center mb-4">
+                        <h2 class="fw-bold me-3 text-primary mb-0">01. About Me</h2>
+                        <div style="height: 1px; background: #ccc; flex-grow: 1; max-width: 300px;"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row align-items-start">
+                <div class="col-lg-7 animate-on-scroll">
+                    <p class="text-muted mb-3 fs-5">
+                        Halo! Saya Anissa, seorang mahasiswa yang memiliki ketertarikan besar pada bagaimana teknologi mengubah cara kita berbisnis. Perjalanan saya dimulai saat saya menyadari bahwa data bukan hanya angka, tapi cerita.
+                    </p>
+                    <p class="text-muted mb-4 fs-5">
+                        Saat ini saya sedang menempuh studi di <strong>Universitas Indonesia Maju</strong> jurusan Bisnis Digital. Saya aktif mencari peluang magang di bidang:
+                    </p>
+                    <ul class="row list-unstyled text-muted">
+                        <li class="col-md-6 mb-2"><i class="bi bi-caret-right-fill text-primary small me-2"></i>Digital Marketing</li>
+                        <li class="col-md-6 mb-2"><i class="bi bi-caret-right-fill text-primary small me-2"></i>Data Analysis</li>
+                        <li class="col-md-6 mb-2"><i class="bi bi-caret-right-fill text-primary small me-2"></i>Product Management</li>
+                        <li class="col-md-6 mb-2"><i class="bi bi-caret-right-fill text-primary small me-2"></i>Business Development</li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 offset-lg-1 mt-4 mt-lg-0 animate-on-scroll">
+                    <div class="p-4 rounded-3 border bg-light position-relative">
+                        <i class="bi bi-quote fs-1 text-primary opacity-25 position-absolute top-0 start-0 m-3"></i>
+                        <figure class="text-end mb-0 pt-3">
+                            <blockquote class="blockquote">
+                                <p class="fs-6 fst-italic">"Striving for excellence in every pixel and every data point."</p>
+                            </blockquote>
+                            <figcaption class="blockquote-footer mt-2">
+                                Anissa
+                            </figcaption>
+                        </figure>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="py-5 bg-light-subtle">
+        <div class="container py-5">
+            <div class="d-flex align-items-center mb-5 animate-on-scroll">
+                <h2 class="fw-bold me-3 text-primary mb-0">02. Education</h2>
+                <div style="height: 1px; background: #ccc; flex-grow: 1; max-width: 300px;"></div>
+            </div>
+
+            <div class="row animate-on-scroll">
+                <div class="col-lg-8">
+                    <div class="timeline ps-4 position-relative">
+                        <!-- Edu Item 1 -->
+                        <div class="timeline-item mb-5 position-relative">
+                            <h4 class="fw-bold">S1 Bisnis Digital</h4>
+                            <h6 class="text-primary fw-bold mb-2">Universitas Indonesia Maju</h6>
+                            <p class="text-muted small mb-3"><i class="bi bi-calendar-event me-2"></i>2021 - Sekarang</p>
+                            <p class="text-muted">
+                                Mempelajari fundamental bisnis digital, e-commerce, pemasaran strategis, dan analisis big data. Aktif dalam organisasi kemahasiswaan.
+                            </p>
+                        </div>
+                        <!-- Edu Item 2 -->
+                        <div class="timeline-item position-relative">
+                            <h4 class="fw-bold">SMA Negeri 1 Jakarta</h4>
+                            <h6 class="text-primary fw-bold mb-2">Jurusan IPA</h6>
+                            <p class="text-muted small mb-3"><i class="bi bi-calendar-event me-2"></i>2018 - 2021</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-5">
+        <div class="container py-5">
+            <div class="d-flex align-items-center mb-5 animate-on-scroll">
+                <h2 class="fw-bold me-3 text-primary mb-0">03. Skills</h2>
+                <div style="height: 1px; background: #ccc; flex-grow: 1; max-width: 300px;"></div>
+            </div>
+
+            <div class="row g-4">
+                <!-- Hard Skills -->
+                <div class="col-md-6 animate-on-scroll">
+                    <h5 class="fw-bold mb-4 text-center text-md-start">Technical Skills</h5>
+                    <div class="custom-card p-4">
+                        <div class="mb-4">
+                            <h6 class="fw-bold text-primary mb-3"><i class="bi bi-megaphone me-2"></i>Marketing</h6>
+                            <div class="d-flex flex-wrap gap-2">
+                                <span class="skill-badge">SEO Optimization</span>
+                                <span class="skill-badge">Meta Ads Manager</span>
+                                <span class="skill-badge">Copywriting</span>
+                                <span class="skill-badge">Google Ads</span>
+                            </div>
+                        </div>
+                        <div>
+                            <h6 class="fw-bold text-primary mb-3"><i class="bi bi-bar-chart-line me-2"></i>Data & Tools</h6>
+                            <div class="d-flex flex-wrap gap-2">
+                                <span class="skill-badge">Microsoft Excel (Advanced)</span>
+                                <span class="skill-badge">Google Analytics 4</span>
+                                <span class="skill-badge">Basic SQL</span>
+                                <span class="skill-badge">Figma</span>
+                                <span class="skill-badge">Tableau</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Soft Skills -->
+                <div class="col-md-6 animate-on-scroll">
+                    <h5 class="fw-bold mb-4 text-center text-md-start">Soft Skills</h5>
+                    <div class="custom-card p-4 d-flex align-items-center justify-content-center">
+                        <div class="row w-100 text-center gy-4">
+                            <div class="col-6">
+                                <i class="bi bi-people fs-2 text-primary mb-2 d-block"></i>
+                                <span class="fw-medium">Teamwork</span>
+                            </div>
+                            <div class="col-6">
+                                <i class="bi bi-lightbulb fs-2 text-primary mb-2 d-block"></i>
+                                <span class="fw-medium">Problem Solving</span>
+                            </div>
+                            <div class="col-6">
+                                <i class="bi bi-chat-dots fs-2 text-primary mb-2 d-block"></i>
+                                <span class="fw-medium">Communication</span>
+                            </div>
+                            <div class="col-6">
+                                <i class="bi bi-clock-history fs-2 text-primary mb-2 d-block"></i>
+                                <span class="fw-medium">Time Management</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-5 bg-light-subtle">
+        <div class="container py-5">
+            <div class="d-flex align-items-center mb-5 animate-on-scroll">
+                <h2 class="fw-bold me-3 text-primary mb-0">04. Portfolio</h2>
+                <div style="height: 1px; background: #ccc; flex-grow: 1; max-width: 300px;"></div>
+            </div>
+
+            <div class="row g-4">
+                <!-- Project 1 -->
+                <div class="col-md-4 animate-on-scroll">
+                    <div class="custom-card">
+                        <div class="p-4 pb-0">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <i class="bi bi-folder-fill fs-1 text-primary"></i>
+                                <a href="#" class="text-dark"><i class="bi bi-box-arrow-up-right fs-4"></i></a>
+                            </div>
+                            <h5 class="fw-bold mb-2">UMKM Kopi Branding</h5>
+                            <p class="text-muted small">
+                                Meningkatkan brand awareness kedai kopi lokal melalui strategi konten Instagram dan TikTok, menghasilkan kenaikan followers sebesar 40%.
+                            </p>
+                        </div>
+                        <div class="p-4 pt-0 mt-auto">
+                            <ul class="list-inline small text-primary font-monospace">
+                                <li class="list-inline-item">Social Media</li>
+                                <li class="list-inline-item">Content</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="col-md-4 animate-on-scroll">
+                    <div class="custom-card">
+                        <div class="p-4 pb-0">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <i class="bi bi-folder-fill fs-1 text-primary"></i>
+                                <a href="#" class="text-dark"><i class="bi bi-box-arrow-up-right fs-4"></i></a>
+                            </div>
+                            <h5 class="fw-bold mb-2">Customer Churn Analysis</h5>
+                            <p class="text-muted small">
+                                Analisis data pelanggan menggunakan Excel dan Python (Basic) untuk mengidentifikasi faktor penyebab pelanggan berhenti berlangganan.
+                            </p>
+                        </div>
+                        <div class="p-4 pt-0 mt-auto">
+                            <ul class="list-inline small text-primary font-monospace">
+                                <li class="list-inline-item">Excel</li>
+                                <li class="list-inline-item">Data Analysis</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="col-md-4 animate-on-scroll">
+                    <div class="custom-card">
+                        <div class="p-4 pb-0">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <i class="bi bi-folder-fill fs-1 text-primary"></i>
+                                <a href="#" class="text-dark"><i class="bi bi-box-arrow-up-right fs-4"></i></a>
+                            </div>
+                            <h5 class="fw-bold mb-2">E-Commerce UI Redesign</h5>
+                            <p class="text-muted small">
+                                Studi kasus perancangan ulang antarmuka aplikasi belanja untuk meningkatkan user experience pada proses checkout.
+                            </p>
+                        </div>
+                        <div class="p-4 pt-0 mt-auto">
+                            <ul class="list-inline small text-primary font-monospace">
+                                <li class="list-inline-item">Figma</li>
+                                <li class="list-inline-item">UI/UX</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section (REVISED: No Form) -->
+    <section id="contact" class="py-5 text-center">
+        <div class="container py-5">
+            <div class="row justify-content-center animate-on-scroll">
+                <div class="col-lg-8">
+                    <p class="text-primary font-monospace mb-2">05. What's Next?</p>
+                    <h2 class="display-4 fw-bold mb-4">Get In Touch</h2>
+                    <p class="lead text-muted mb-5">
+                        Saya saat ini terbuka untuk peluang magang atau freelance project. 
+                        Baik Anda memiliki pertanyaan atau sekadar ingin menyapa, kotak masuk saya selalu terbuka!
+                    </p>
+                    
+                    <div class="d-flex flex-wrap justify-content-center gap-4">
+                        <a href="mailto:anissa@student.ui.ac.id" class="btn btn-primary px-5 py-3 fw-bold rounded-pill">
+                            <i class="bi bi-envelope-fill me-2"></i> Say Hello
+                        </a>
+                        <a href="https://wa.me/6281234567890" target="_blank" class="btn btn-outline-primary px-5 py-3 fw-bold rounded-pill">
+                            <i class="bi bi-whatsapp me-2"></i> WhatsApp
+                        </a>
+                    </div>
+
+                    <div class="mt-5 pt-4 d-flex justify-content-center gap-4">
+                        <a href="#" class="text-secondary fs-3 hover-primary"><i class="bi bi-linkedin"></i></a>
+                        <a href="#" class="text-secondary fs-3 hover-primary"><i class="bi bi-github"></i></a>
+                        <a href="#" class="text-secondary fs-3 hover-primary"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="text-secondary fs-3 hover-primary"><i class="bi bi-twitter-x"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-4 text-center text-muted small">
+        <div class="container">
+            <p class="mb-0 font-monospace">Designed & Built by anissaworks</p>
+        </div>
+    </footer>
+
+    <!-- Scroll Top Button -->
+    <button onclick="scrollToTop()" id="scrollTopBtn" class="btn-scroll-top shadow">
+        <i class="bi bi-arrow-up"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // --- 1. Custom Active Link Logic (Fix Navbar Stay) ---
+        const sections = document.querySelectorAll("section");
+        const navLinks = document.querySelectorAll(".nav-link");
+
+        function activateMenu() {
+            let len = sections.length;
+            while(--len && window.scrollY + 150 < sections[len].offsetTop) {}
+            
+            navLinks.forEach(link => link.classList.remove("active"));
+            
+            if(len >= 0) {
+                const activeId = sections[len].id;
+                const activeLink = document.querySelector(`.nav-link[href="#${activeId}"]`);
+                if(activeLink) activeLink.classList.add("active");
+            }
+        }
+        
+        // Manual Click Handler to Force Active State
+        function setActive(element) {
+            navLinks.forEach(link => link.classList.remove("active"));
+            element.classList.add("active");
+            
+            // Close mobile menu if open
+            const navbarCollapse = document.getElementById('navbarNav');
+            if (navbarCollapse.classList.contains('show')) {
+                new bootstrap.Collapse(navbarCollapse).hide();
+            }
+        }
+        
+        window.addEventListener("scroll", activateMenu);
+        activateMenu(); // Call on load
+
+
+        // --- 2. Dark Mode Logic ---
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const html = document.documentElement;
+
+        const storedTheme = localStorage.getItem('theme');
+        if (storedTheme) {
+            html.setAttribute('data-bs-theme', storedTheme);
+            updateIcon(storedTheme);
+        }
+
+        darkModeToggle.addEventListener('click', () => {
+            const currentTheme = html.getAttribute('data-bs-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            html.setAttribute('data-bs-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateIcon(newTheme);
+        });
+
+        function updateIcon(theme) {
+            if (theme === 'dark') {
+                themeIcon.classList.remove('bi-moon-stars-fill');
+                themeIcon.classList.add('bi-sun-fill');
+                themeIcon.classList.add('text-warning');
+            } else {
+                themeIcon.classList.remove('bi-sun-fill');
+                themeIcon.classList.remove('text-warning');
+                themeIcon.classList.add('bi-moon-stars-fill');
+            }
+        }
+
+        // --- 3. Anime.js Animations ---
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    anime({
+                        targets: entry.target,
+                        opacity: [0, 1],
+                        translateY: [20, 0],
+                        easing: 'easeOutCubic',
+                        duration: 800,
+                        delay: anime.stagger(100)
+                    });
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+
+        // --- 4. Navbar Sticky Shadow & Scroll Top ---
+        window.addEventListener('scroll', () => {
+            const scrollBtn = document.getElementById('scrollTopBtn');
+            if (window.scrollY > 50) {
+                scrollBtn.style.display = 'block';
+            } else {
+                scrollBtn.style.display = 'none';
+            }
+        });
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
